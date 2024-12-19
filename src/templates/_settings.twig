@@ -1,0 +1,23 @@
+{# @var plugin \vandres\monitoringclient\MonitoringClient #}
+{# @var settings \vandres\monitoringclient\models\Settings #}
+
+{% import '_includes/forms.twig' as forms %}
+
+{% macro configWarning(setting) -%}
+    {% set setting = '<code>'~setting~'</code>' %}
+    {{ "This is being overridden by the {setting} config setting in your {file} config file."|t('monitoring-client', {
+        setting: setting,
+        file: '<code>monitoring-client.php</code>'
+    })|raw }}
+{%- endmacro %}
+
+{% from _self import configWarning %}
+
+{{ forms.textField({
+    label:        "Client secret"|t('monitoring-client'),
+    id:           'clientSecret',
+    name:         'clientSecret',
+    value:        (settings.clientSecret ?: ''),
+    disabled:     'clientSecret' in overrides,
+    warning:      'clientSecret' in overrides ? configWarning('clientSecret'),
+}) }}

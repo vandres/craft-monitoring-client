@@ -1,0 +1,48 @@
+{
+  "name": "vandres/craft-monitoring-client",
+  "description": "Provides information about the Craft installation via an API",
+  "type": "craft-plugin",
+  "license": "proprietary",
+  "support": {
+    "email": "andres@voan.ch",
+    "issues": "https://github.com/vandres/craft-monitoring-client/issues?state=open",
+    "source": "https://github.com/vandres/craft-monitoring-client",
+    "docs": "https://github.com/vandres/craft-monitoring-client",
+    "rss": "https://github.com/vandres/craft-monitoring-client/releases.atom"
+  },
+  "require": {
+    "php": ">=8.0",
+    "craftcms/cms": "^5.0.0"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "vandres\\monitoringclient\\": "src/"
+    }
+  },
+  "extra": {
+    "handle": "monitoring-client",
+    "name": "Monitoring Client",
+    "developer": "Volker Andres",
+    "documentationUrl": "https://github.com/vandres/craft-monitoring-client",
+    "class": "vandres\\monitoringclient\\MonitoringClient"
+  },
+  "scripts": {
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "8.0"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}

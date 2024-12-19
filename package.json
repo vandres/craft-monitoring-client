@@ -1,0 +1,22 @@
+{
+  "name": "craft-monitoring-client",
+  "description": "Provides information about the Craft installation via an API",
+  "version": "1.0.0",
+  "scripts": {
+    "release": "release-it"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vandres/craft-monitoring-client.git"
+  },
+  "author": "Volker Andres <andres@voan.ch",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/vandres/craft-monitoring-client/issues"
+  },
+  "homepage": "https://github.com/vandres/craft-monitoring-client#readme",
+  "devDependencies": {
+    "release-it": "^17.2.1"
+  }
+}
