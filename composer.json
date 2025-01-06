@@ -3,6 +3,12 @@
   "description": "Provides information about the Craft installation via an API",
   "type": "craft-plugin",
   "license": "proprietary",
+  "authors": [
+    {
+      "name": "Volker Andres",
+      "homepage": "https://www.voan.ch"
+    }
+  ],
   "support": {
     "email": "andres@voan.ch",
     "issues": "https://github.com/vandres/craft-monitoring-client/issues?state=open",
