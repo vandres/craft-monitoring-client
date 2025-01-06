@@ -36,6 +36,13 @@ composer require vandres/craft-monitoring-client
 ./craft plugin/install monitoring-client
 ```
 
+## Generate key
+
+You can use whatever key you want (except empty string). If you like, the plugin can create a key for you. 
+You will need to copy and paste it yourself.
+
+`php craft monitoring-client/api/key`
+
 ## Configuration
 
 You can use the settings dialog in the control panel. But I would recommend creating a `monitoring-client.php` in your config folder.
