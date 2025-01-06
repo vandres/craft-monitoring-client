@@ -5,7 +5,10 @@ namespace vandres\monitoringclient;
 use Craft;
 use craft\base\Model;
 use craft\base\Plugin;
+use craft\events\RegisterUrlRulesEvent;
+use craft\web\UrlManager;
 use vandres\monitoringclient\models\Settings;
+use yii\base\Event;
 
 /**
  * monitoring-client plugin
@@ -41,6 +44,13 @@ class MonitoringClient extends Plugin
     private function setUp()
     {
         Craft::$app->onInit(function () {
+            Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+                function (RegisterUrlRulesEvent $event) {
+                    $event->rules = array_merge($event->rules, [
+                        'POST monitoring/api/system-report' => 'monitoring-client/api/system-report',
+                    ]);
+                }
+            );
         });
     }
 

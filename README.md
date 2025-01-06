@@ -2,9 +2,16 @@
 
 Provides information about the Craft installation via an API
 
+## Goal
+
+This plugin is very simple and just provides a JSON of all the versions of plugins, PHP and so on.
+
+The goal is, to have the client installed on all your Craft websites and using a central server plugin, 
+which aggregates and interprets the data.
+
 ## Requirements
 
-This plugin requires Craft CMS 5.0.0 or later, and PHP 8.0 or later.
+This plugin requires Craft CMS 4.0.0 or later, and PHP 8.0 or later.
 
 ## Installation
 
@@ -27,6 +34,20 @@ composer require vandres/craft-monitoring-client
 
 # tell Craft to install the plugin
 ./craft plugin/install monitoring-client
+```
+
+## Usage
+
+By installing and configuring the plugin, the information of the installation gets available via an endpoint. 
+You can access it manually like the following:
+
+```shell
+curl \
+    --location 'https://my-project.test/monitoring/api/system-report' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+      "clientSecret": "Your secret"
+    }'
 ```
 
 ## Support my work

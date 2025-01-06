@@ -8,15 +8,12 @@ use craft\base\PluginInterface;
 use craft\db\Connection;
 use craft\helpers\App;
 use craft\helpers\Db;
+use vandres\monitoringclient\MonitoringClient;
 use yii\base\Module;
 
 class SystemReportService
 {
     /**
-     * @TODO updates
-     * @TODO versions less pretty and more technical
-     * @TODO add api documentation
-     *
      * @return array
      */
     public function getReport()
@@ -61,17 +58,27 @@ class SystemReportService
             'aliases' => $aliases,
             'phpInfo' => $this->_phpInfo(),
             'requirements' => $this->_requirementResults(),
+            'updates' => $this->_getUpdates(),
         ];
     }
 
     private function _appInfo(): array
     {
         $info = [
-            'PHP version' => App::phpVersion(),
-            'OS version' => PHP_OS . ' ' . php_uname('r'),
-            'Database driver & version' => $this->_dbDriver(),
-            'Image driver & version' => $this->_imageDriver(),
-            'Craft edition & version' => sprintf('Craft %s %s', Craft::$app->edition->name, Craft::$app->getVersion()),
+            'php' => [
+                'name' => 'PHP',
+                'version' => App::phpVersion(),
+            ],
+            'os' => [
+                'name' => PHP_OS,
+                'version' => php_uname('r'),
+            ],
+            'database' => $this->_dbDriver(),
+            'image' => $this->_imageDriver(),
+            'craft' => [
+                'name' => Craft::$app->edition->name,
+                'version' => Craft::$app->getVersion(),
+            ],
         ];
 
         if (!class_exists(InstalledVersions::class, false)) {
@@ -82,23 +89,26 @@ class SystemReportService
         }
 
         if (class_exists(InstalledVersions::class, false)) {
-            $this->_addVersion($info, 'Yii version', 'yiisoft/yii2');
-            $this->_addVersion($info, 'Twig version', 'twig/twig');
-            $this->_addVersion($info, 'Guzzle version', 'guzzlehttp/guzzle');
+            $this->_addVersion($info, 'Yii', 'yiisoft/yii2');
+            $this->_addVersion($info, 'Twig', 'twig/twig');
+            $this->_addVersion($info, 'Guzzle', 'guzzlehttp/guzzle');
         }
 
         return $info;
     }
 
-    private static function _dbDriver(): string
+    private static function _dbDriver(): array
     {
         $db = Craft::$app->getDb();
         $label = $db->getDriverLabel();
         $version = App::normalizeVersion($db->getSchema()->getServerVersion());
-        return "$label $version";
+        return [
+            'name' => $label,
+            'version' => $version,
+        ];
     }
 
-    private function _imageDriver(): string
+    private function _imageDriver(): array
     {
         $imagesService = Craft::$app->getImages();
 
@@ -108,7 +118,10 @@ class SystemReportService
             $driverName = 'Imagick';
         }
 
-        return $driverName . ' ' . $imagesService->getVersion();
+        return [
+            'name' => $driverName,
+            'version' => $imagesService->getVersion(),
+        ];
     }
 
     private function _addVersion(array &$info, string $label, string $packageName): void
@@ -120,7 +133,10 @@ class SystemReportService
         }
 
         if ($version !== null) {
-            $info[$label] = $version;
+            $info[strtolower($label)] = [
+                'name' => $label,
+                'version' => $version,
+            ];
         }
     }
 
@@ -185,7 +201,7 @@ class SystemReportService
         $security = Craft::$app->getSecurity();
 
         foreach ($sections as $section) {
-            $heading = substr($section, 0, strpos($section, '</h2>'));
+            $heading = strtolower(substr($section, 0, strpos($section, '</h2>')));
 
             if (preg_match_all('#%S%(?:<td>(.*?)</td>)?(?:<td>(.*?)</td>)?(?:<td>(.*?)</td>)?%E%#', $section, $matches, PREG_SET_ORDER) !== 0) {
                 /** @var array[] $matches */
@@ -195,9 +211,13 @@ class SystemReportService
                     }
 
                     $value = $row[2];
-                    $name = $row[1];
+                    $name = strtolower($row[1]);
 
-                    $phpInfo[$heading][$name] = $security->redactIfSensitive($name, $value);
+                    if (MonitoringClient::getInstance()->getSettings()->secretsInPlainText) {
+                        $phpInfo[$heading][$name] = $value;
+                    } else {
+                        $phpInfo[$heading][$name] = $security->redactIfSensitive($name, $value);
+                    }
                 }
             }
         }
@@ -216,5 +236,10 @@ class SystemReportService
         $reqCheck->checkCraft();
 
         return $reqCheck->getResult()['requirements'];
+    }
+
+    private function _getUpdates()
+    {
+        return Craft::$app->getUpdates()->getUpdates();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace vandres\monitoringclient\models;
 
-use Craft;
 use craft\base\Model;
 
 /**
@@ -10,12 +9,14 @@ use craft\base\Model;
  */
 class Settings extends Model
 {
+    public bool $secretsInPlainText = false;
     public string $clientSecret = '';
 
     public function defineRules(): array
     {
         return [
             [['clientSecret'], 'required'],
+            [['secretsInPlainText'], 'boolean'],
         ];
     }
 }

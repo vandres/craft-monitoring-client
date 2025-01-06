@@ -26,6 +26,10 @@ class ApiController extends \craft\web\Controller
         $params = \Craft::$app->request->getBodyParams();
         $clientSecret = $params['clientSecret'] ?? null;
 
+        if (empty($clientSecret) || empty($this->settings->clientSecret)) {
+            throw new BadRequestHttpException('Valid token required');
+        }
+
         if ($clientSecret !== $this->settings->clientSecret) {
             throw new BadRequestHttpException('Valid token required');
         }

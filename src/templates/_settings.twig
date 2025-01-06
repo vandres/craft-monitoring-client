@@ -21,3 +21,13 @@
     disabled:     'clientSecret' in overrides,
     warning:      'clientSecret' in overrides ? configWarning('clientSecret'),
 }) }}
+
+{{ forms.lightswitchField({
+    label:        'Transfer secrets in plain text'|t('monitoring-client'),
+    name:         'secretsInPlainText',
+    id:           'secretsInPlainText',
+    on:           settings.secretsInPlainText,
+    disabled:     'secretsInPlainText' in overrides,
+    warning:      'secretsInPlainText' in overrides ? configWarning('secretsInPlainText'),
+}) }}
+
