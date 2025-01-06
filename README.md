@@ -38,7 +38,7 @@ composer require vandres/craft-monitoring-client
 
 ## Configuration
 
-You can use the settings dialog in the control panel. But I would recommend creating a `contact-form-extended.php[monitoring-client.php](../../config/monitoring-client.php)` in your config folder.
+You can use the settings dialog in the control panel. But I would recommend creating a `monitoring-client.php` in your config folder.
 
 ```php
 return [
