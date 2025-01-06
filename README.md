@@ -36,6 +36,18 @@ composer require vandres/craft-monitoring-client
 ./craft plugin/install monitoring-client
 ```
 
+## Configuration
+
+You can use the settings dialog in the control panel. But I would recommend creating a `contact-form-extended.php[monitoring-client.php](../../config/monitoring-client.php)` in your config folder.
+
+```php
+return [
+    'clientSecret' => \craft\helpers\App::env('MONITORING_CLIENT_SECRET'),
+    'secretsInPlainText' => false,
+];
+
+```
+
 ## Usage
 
 By installing and configuring the plugin, the information of the installation gets available via an endpoint. 
