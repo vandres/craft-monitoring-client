@@ -76,7 +76,7 @@ class SystemReportService
             'database' => $this->_dbDriver(),
             'image' => $this->_imageDriver(),
             'craft' => [
-                'name' => Craft::$app->edition->name,
+                'name' => Craft::$app->getEditionName(),
                 'version' => Craft::$app->getVersion(),
             ],
         ];
