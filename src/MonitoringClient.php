@@ -21,10 +21,10 @@ use yii\base\Event;
  */
 class MonitoringClient extends Plugin
 {
-    public string $schemaVersion = '1.0.0';
-    public bool $hasCpSettings = true;
+    public $schemaVersion = '0.1.0';
+    public $hasCpSettings = true;
 
-    public static function config(): array
+    public static function config()
     {
         return [
             'components' => [
@@ -32,52 +32,30 @@ class MonitoringClient extends Plugin
         ];
     }
 
-    public function init(): void
+    public function init()
     {
         parent::init();
 
         $this->setUp();
-        $this->setUpSite();
-        $this->setUpCp();
     }
 
     private function setUp()
     {
-        Craft::$app->onInit(function () {
-            Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-                function (RegisterUrlRulesEvent $event) {
-                    $event->rules = array_merge($event->rules, [
-                        'POST monitoring/api/system-report' => 'monitoring-client/api/system-report',
-                    ]);
-                }
-            );
-        });
-    }
-
-    private function setUpSite()
-    {
-        Craft::$app->onInit(function () {
-            if (!Craft::$app->getRequest()->getIsSiteRequest()) {
-                return;
+        Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules = array_merge($event->rules, [
+                    'POST monitoring/api/system-report' => 'monitoring-client/api/system-report',
+                ]);
             }
-        });
+        );
     }
 
-    private function setUpCp()
-    {
-        Craft::$app->onInit(function () {
-            if (!Craft::$app->getRequest()->getIsCpRequest()) {
-                return;
-            }
-        });
-    }
-
-    protected function createSettingsModel(): ?Model
+    protected function createSettingsModel()
     {
         return Craft::createObject(\vandres\monitoringclient\models\Settings::class);
     }
 
-    protected function settingsHtml(): ?string
+    protected function settingsHtml()
     {
         // Get and pre-validate the settings
         $settings = $this->getSettings();

@@ -62,7 +62,7 @@ class SystemReportService
         ];
     }
 
-    private function _appInfo(): array
+    private function _appInfo()
     {
         $info = [
             'php' => [
@@ -97,7 +97,7 @@ class SystemReportService
         return $info;
     }
 
-    private static function _dbDriver(): array
+    private static function _dbDriver()
     {
         $db = Craft::$app->getDb();
         $label = $db->getDriverLabel();
@@ -108,7 +108,7 @@ class SystemReportService
         ];
     }
 
-    private function _imageDriver(): array
+    private function _imageDriver()
     {
         $imagesService = Craft::$app->getImages();
 
@@ -124,11 +124,11 @@ class SystemReportService
         ];
     }
 
-    private function _addVersion(array &$info, string $label, string $packageName): void
+    private function _addVersion(array &$info, string $label, string $packageName)
     {
         try {
             $version = InstalledVersions::getPrettyVersion($packageName) ?? InstalledVersions::getVersion($packageName);
-        } catch (\OutOfBoundsException) {
+        } catch (\OutOfBoundsException $e) {
             return;
         }
 
@@ -140,7 +140,7 @@ class SystemReportService
         }
     }
 
-    private static function _phpInfo(): array
+    private static function _phpInfo()
     {
         // Remove any arrays from $_ENV and $_SERVER to get around an "Array to string conversion" error
         $envVals = [];
@@ -225,7 +225,7 @@ class SystemReportService
         return $phpInfo;
     }
 
-    private function _requirementResults(): array
+    private function _requirementResults()
     {
         $reqCheck = new \RequirementsChecker();
         $dbConfig = Craft::$app->getConfig()->getDb();

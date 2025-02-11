@@ -11,10 +11,10 @@ use yii\web\Response;
 class ApiController extends \craft\web\Controller
 {
     public $enableCsrfValidation = false;
-    protected array|bool|int $allowAnonymous = true;
-    private ?Settings $settings;
+    protected $allowAnonymous = true;
+    private $settings;
 
-    public function beforeAction($action): bool
+    public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
             return false;
@@ -46,7 +46,7 @@ class ApiController extends \craft\web\Controller
      *
      * @return Response
      */
-    public function actionSystemReport(): Response
+    public function actionSystemReport()
     {
         $service = new SystemReportService();
 

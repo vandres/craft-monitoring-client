@@ -9,10 +9,10 @@ use craft\base\Model;
  */
 class Settings extends Model
 {
-    public bool $secretsInPlainText = false;
-    public string $clientSecret = '';
+    public $secretsInPlainText = false;
+    public $clientSecret = '';
 
-    public function defineRules(): array
+    protected function defineRules(): array
     {
         return [
             [['clientSecret'], 'required'],
