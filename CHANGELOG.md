@@ -1,7 +1,12 @@
 # Release Notes for Monitoring Client
 
+## [0.2.0] - 2025-02-11
+
+- feat(craft): implemented support for Craft v3 [`3532690`](https://github.com/vandres/craft-monitoring-client/commit/353269099cfaa0fe6218f43d36c492e17673a1d8)
+
 ## [1.1.1] - 2025-01-07
 
+- chore(release): 1.1.1 [`35f5503`](https://github.com/vandres/craft-monitoring-client/commit/35f5503cc2ad19e141a4771f9891e4b7a2425b5f)
 - fix(api): get edition name the deprecated way [`e91f0bd`](https://github.com/vandres/craft-monitoring-client/commit/e91f0bd7e42323cd926b3a14d47c4b7639ff9374)
 
 ## [1.1.0] - 2025-01-06
@@ -23,6 +28,7 @@
 - feat(setup): add release script [`60f16f1`](https://github.com/vandres/craft-monitoring-client/commit/60f16f1fe8acd47fe4690df654beade14de23b95)
 - chore(release): 1.0.1 [`467d800`](https://github.com/vandres/craft-monitoring-client/commit/467d8009ba4e6191fe9c45a7a036dc67376533f4)
 
+[0.2.0]: https://github.com/vandres/craft-monitoring-client/compare/1.1.1...0.2.0
 [1.1.1]: https://github.com/vandres/craft-monitoring-client/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/vandres/craft-monitoring-client/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/vandres/craft-monitoring-client/compare/1.0.1...1.0.2
