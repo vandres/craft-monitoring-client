@@ -75,6 +75,6 @@ PayPal: https://www.paypal.com/donate/?hosted_button_id=3WDU85HZCKMPA
 
 Buy me a coffee: https://buymeacoffee.com/vandres
 
-## Credits
+## Supporter
 
-Icon by [Pexelpy](https://freeicons.io/cyberpunk-icon-set-31733/camera-cctv-monitoring-security-icon-1181165) on [freeicons.io](https://freeicons.io)
+1. [Ambition Creative](https://www.ambitioncreative.co.uk/): Icons
