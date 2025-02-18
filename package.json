@@ -1,7 +1,7 @@
 {
   "name": "craft-monitoring-client",
   "description": "Provides information about the Craft installation via an API",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
     "release": "release-it"
   },
