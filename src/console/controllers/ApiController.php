@@ -12,7 +12,7 @@ class ApiController extends Controller
      */
     public function actionKey()
     {
-        $this->stdout(\Craft::$app->getSecurity()->generateRandomString(20));
+        $this->stdout(\Craft::$app->getSecurity()->generateRandomString(50));
         $this->stdout(PHP_EOL);
 
         return ExitCode::OK;
