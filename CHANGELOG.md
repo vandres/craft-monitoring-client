@@ -1,8 +1,13 @@
 # Release Notes for Monitoring Client
 
+## [1.1.3] - 2025-02-28
+
+- fix(api): send plugin edition [`557af37`](https://github.com/vandres/craft-monitoring-client/commit/557af37484365ecf03cd56537293aabd199d28f2)
+
 ## [1.1.2] - 2025-02-18
 
 - feat(setup): new icon [`18f9f28`](https://github.com/vandres/craft-monitoring-client/commit/18f9f287ee1e0bd9dae27cced966ce1255893911)
+- chore(release): 1.1.2 [`9b3c748`](https://github.com/vandres/craft-monitoring-client/commit/9b3c748c069eb35db46d2372d7834cde745b44ef)
 
 ## [1.1.1] - 2025-01-07
 
@@ -22,6 +27,11 @@
 
 ## [1.0.1] - 2025-01-06
 
+## [0.2.1] - 2025-02-18
+
+- chore(release): 0.2.1 [`cc5e3e9`](https://github.com/vandres/craft-monitoring-client/commit/cc5e3e9b0ddddc2ec913b54620ad37a271c52e63)
+- feat(setup): new icon [`25ab524`](https://github.com/vandres/craft-monitoring-client/commit/25ab524541240ef81545f861800c095e6ac3ed1e)
+
 ## 0.2.0 - 2025-02-12
 
 - feat(setup): initial commit [`fa81b11`](https://github.com/vandres/craft-monitoring-client/commit/fa81b11b7ce02e4580f2056882e90ca634878dd9)
@@ -39,8 +49,10 @@
 - fix(api): get edition name the deprecated way [`e91f0bd`](https://github.com/vandres/craft-monitoring-client/commit/e91f0bd7e42323cd926b3a14d47c4b7639ff9374)
 - fix(docs): corrected wrong file path [`fb735c1`](https://github.com/vandres/craft-monitoring-client/commit/fb735c1852052d33c587ab2a128abdca3e5c238e)
 
+[1.1.3]: https://github.com/vandres/craft-monitoring-client/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/vandres/craft-monitoring-client/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/vandres/craft-monitoring-client/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/vandres/craft-monitoring-client/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/vandres/craft-monitoring-client/compare/1.0.1...1.0.2
-[1.0.1]: https://github.com/vandres/craft-monitoring-client/compare/0.2.0...1.0.1
+[1.0.1]: https://github.com/vandres/craft-monitoring-client/compare/0.2.1...1.0.1
+[0.2.1]: https://github.com/vandres/craft-monitoring-client/compare/0.2.0...0.2.1
