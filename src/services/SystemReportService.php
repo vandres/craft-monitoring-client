@@ -52,6 +52,7 @@ class SystemReportService
                 'name' => $plugin->name,
                 'description' => $plugin->description,
                 'documentation' => $plugin->documentationUrl,
+                'edition' => $plugin->edition,
                 'version' => $plugin->getVersion(),
             ], Craft::$app->getPlugins()->getAllPlugins(),),
             'modules' => $modules,
