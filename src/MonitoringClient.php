@@ -21,8 +21,19 @@ use yii\base\Event;
  */
 class MonitoringClient extends Plugin
 {
+    const EDITION_LITE = 'lite';
+    const EDITION_PRO = 'pro';
+
     public string $schemaVersion = '1.0.0';
     public bool $hasCpSettings = true;
+
+    public static function editions(): array
+    {
+        return [
+            self::EDITION_LITE,
+            self::EDITION_PRO,
+        ];
+    }
 
     public static function config(): array
     {

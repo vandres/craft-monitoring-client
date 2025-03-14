@@ -6,8 +6,13 @@ Provides information about the Craft installation via an API
 
 This plugin is very simple and just provides a JSON of all the versions of plugins, PHP and so on.
 
-The goal is, to have the client installed on all your Craft websites and using a central server plugin, 
+The goal is, to have the client installed on all your Craft websites and using a central server, 
 which aggregates and interprets the data.
+
+## SaaS-Server 
+
+We offer a SaaS server for you to use directly. Only thing you will need, is the Pro edition of the plugin or an agency account.
+The server is available, free for use, here https://craft-monitoring.com
 
 ## Requirements
 
