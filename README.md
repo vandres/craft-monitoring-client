@@ -6,12 +6,17 @@ Provides information about the Craft installation via an API
 
 This plugin is very simple and just provides a JSON of all the versions of plugins, PHP and so on.
 
-The goal is, to have the client installed on all your Craft websites and using a central server plugin, 
+The goal is, to have the client installed on all your Craft websites and using a central server,
 which aggregates and interprets the data.
+
+## SaaS-Server
+
+We offer a SaaS server for you to use directly. Only thing you will need, is the Pro edition of the plugin or an agency account.
+The server is available, free for use, here https://craft-monitoring.com
 
 ## Requirements
 
-This plugin requires Craft CMS 4.0.0 or later, and PHP 8.0 or later.
+This plugin requires Craft CMS 3.5 or later, and PHP 7.0 or later.
 
 ## Installation
 
@@ -38,7 +43,7 @@ composer require vandres/craft-monitoring-client
 
 ## Generate key
 
-You can use whatever key you want (except empty string). If you like, the plugin can create a key for you. 
+You can use whatever key you want (except empty string). If you like, the plugin can create a key for you.
 You will need to copy and paste it yourself.
 
 `php craft monitoring-client/api/key`
@@ -57,7 +62,7 @@ return [
 
 ## Usage
 
-By installing and configuring the plugin, the information of the installation gets available via an endpoint. 
+By installing and configuring the plugin, the information of the installation gets available via an endpoint.
 You can access it manually like the following:
 
 ```shell
