@@ -3,7 +3,6 @@
 namespace vandres\monitoringclient;
 
 use Craft;
-use craft\base\Model;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
@@ -21,8 +20,19 @@ use yii\base\Event;
  */
 class MonitoringClient extends Plugin
 {
+    const EDITION_LITE = 'lite';
+    const EDITION_PRO = 'pro';
+
     public $schemaVersion = '0.1.0';
     public $hasCpSettings = true;
+
+    public static function editions(): array
+    {
+        return [
+            self::EDITION_LITE,
+            self::EDITION_PRO,
+        ];
+    }
 
     public static function config()
     {
