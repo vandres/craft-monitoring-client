@@ -1,7 +1,12 @@
 # Release Notes for Monitoring Client
 
+## [1.2.0] - 2025-03-14
+
+- fix(setup): allow support for multiple editions [`77eb280`](https://github.com/vandres/craft-monitoring-client/commit/77eb280d34cb02fced21b1739e62dbc2bafcf593)
+
 ## [1.1.3] - 2025-02-28
 
+- chore(release): 1.1.3 [`aa5ce65`](https://github.com/vandres/craft-monitoring-client/commit/aa5ce65f12a047869f1f696bbdd4eeb6651acd47)
 - fix(api): send plugin edition [`557af37`](https://github.com/vandres/craft-monitoring-client/commit/557af37484365ecf03cd56537293aabd199d28f2)
 
 ## [1.1.2] - 2025-02-18
@@ -27,6 +32,16 @@
 
 ## [1.0.1] - 2025-01-06
 
+## [0.3.0] - 2025-03-14
+
+- chore(release): 0.3.0 [`235cd11`](https://github.com/vandres/craft-monitoring-client/commit/235cd113bd94b101f7f76d033e5377ba2b1efbf1)
+- fix(setup): allow support for multiple editions [`c711509`](https://github.com/vandres/craft-monitoring-client/commit/c711509384c5beab99ea350513158ca3126e138f)
+
+## [0.2.2] - 2025-02-28
+
+- chore(release): 0.2.2 [`91798aa`](https://github.com/vandres/craft-monitoring-client/commit/91798aa6818bb775092e7d034e568567b8d9b47c)
+- fix(api): send plugin edition [`41c1af8`](https://github.com/vandres/craft-monitoring-client/commit/41c1af863c7cf46816a6816c3d17e878eb80ed4e)
+
 ## [0.2.1] - 2025-02-18
 
 - chore(release): 0.2.1 [`cc5e3e9`](https://github.com/vandres/craft-monitoring-client/commit/cc5e3e9b0ddddc2ec913b54620ad37a271c52e63)
@@ -49,10 +64,13 @@
 - fix(api): get edition name the deprecated way [`e91f0bd`](https://github.com/vandres/craft-monitoring-client/commit/e91f0bd7e42323cd926b3a14d47c4b7639ff9374)
 - fix(docs): corrected wrong file path [`fb735c1`](https://github.com/vandres/craft-monitoring-client/commit/fb735c1852052d33c587ab2a128abdca3e5c238e)
 
+[1.2.0]: https://github.com/vandres/craft-monitoring-client/compare/1.1.3...1.2.0
 [1.1.3]: https://github.com/vandres/craft-monitoring-client/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/vandres/craft-monitoring-client/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/vandres/craft-monitoring-client/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/vandres/craft-monitoring-client/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/vandres/craft-monitoring-client/compare/1.0.1...1.0.2
-[1.0.1]: https://github.com/vandres/craft-monitoring-client/compare/0.2.1...1.0.1
+[1.0.1]: https://github.com/vandres/craft-monitoring-client/compare/0.3.0...1.0.1
+[0.3.0]: https://github.com/vandres/craft-monitoring-client/compare/0.2.2...0.3.0
+[0.2.2]: https://github.com/vandres/craft-monitoring-client/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/vandres/craft-monitoring-client/compare/0.2.0...0.2.1
