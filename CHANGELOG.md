@@ -1,7 +1,12 @@
 # Release Notes for Monitoring Client
 
+## [1.2.1] - 2025-04-07
+
+- fix(api): don't cache update information [`dbc8f99`](https://github.com/vandres/craft-monitoring-client/commit/dbc8f994341af7fbba4349633fc0872d9c48060b)
+
 ## [1.2.0] - 2025-03-14
 
+- chore(release): 1.2.0 [`3fae02d`](https://github.com/vandres/craft-monitoring-client/commit/3fae02d497ad1b28c078d6b65d4ada15d70b3163)
 - fix(setup): allow support for multiple editions [`77eb280`](https://github.com/vandres/craft-monitoring-client/commit/77eb280d34cb02fced21b1739e62dbc2bafcf593)
 
 ## [1.1.3] - 2025-02-28
@@ -64,6 +69,7 @@
 - fix(api): get edition name the deprecated way [`e91f0bd`](https://github.com/vandres/craft-monitoring-client/commit/e91f0bd7e42323cd926b3a14d47c4b7639ff9374)
 - fix(docs): corrected wrong file path [`fb735c1`](https://github.com/vandres/craft-monitoring-client/commit/fb735c1852052d33c587ab2a128abdca3e5c238e)
 
+[1.2.1]: https://github.com/vandres/craft-monitoring-client/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/vandres/craft-monitoring-client/compare/1.1.3...1.2.0
 [1.1.3]: https://github.com/vandres/craft-monitoring-client/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/vandres/craft-monitoring-client/compare/1.1.1...1.1.2
