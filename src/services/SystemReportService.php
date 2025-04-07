@@ -241,6 +241,6 @@ class SystemReportService
 
     private function _getUpdates()
     {
-        return Craft::$app->getUpdates()->getUpdates();
+        return Craft::$app->getUpdates()->getUpdates(true);
     }
 }
