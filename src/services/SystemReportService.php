@@ -5,10 +5,10 @@ namespace vandres\monitoringclient\services;
 use Composer\InstalledVersions;
 use Craft;
 use craft\base\PluginInterface;
-use craft\db\Connection;
 use craft\helpers\App;
-use craft\helpers\Db;
+use craft\helpers\ArrayHelper;
 use vandres\monitoringclient\MonitoringClient;
+use yii\base\InvalidArgumentException;
 use yii\base\Module;
 
 class SystemReportService
@@ -48,13 +48,15 @@ class SystemReportService
 
         return [
             'appInfo' => $this->_appInfo(),
-            'plugins' => array_map(fn($plugin) => [
-                'name' => $plugin->name,
-                'description' => $plugin->description,
-                'documentation' => $plugin->documentationUrl,
-                'edition' => $plugin->edition,
-                'version' => $plugin->getVersion(),
-            ], Craft::$app->getPlugins()->getAllPlugins(),),
+            'plugins' => array_map(function ($plugin) {
+                return [
+                    'name' => $plugin->name,
+                    'description' => $plugin->description,
+                    'documentation' => $plugin->documentationUrl,
+                    'edition' => $plugin->edition ?? 'lite',
+                    'version' => $plugin->getVersion(),
+                ];
+            }, Craft::$app->getPlugins()->getAllPlugins()),
             'modules' => $modules,
             'aliases' => $aliases,
             'phpInfo' => $this->_phpInfo(),
@@ -96,49 +98,6 @@ class SystemReportService
         }
 
         return $info;
-    }
-
-    private static function _dbDriver()
-    {
-        $db = Craft::$app->getDb();
-        $label = $db->getDriverLabel();
-        $version = App::normalizeVersion($db->getSchema()->getServerVersion());
-        return [
-            'name' => $label,
-            'version' => $version,
-        ];
-    }
-
-    private function _imageDriver()
-    {
-        $imagesService = Craft::$app->getImages();
-
-        if ($imagesService->getIsGd()) {
-            $driverName = 'GD';
-        } else {
-            $driverName = 'Imagick';
-        }
-
-        return [
-            'name' => $driverName,
-            'version' => $imagesService->getVersion(),
-        ];
-    }
-
-    private function _addVersion(array &$info, string $label, string $packageName)
-    {
-        try {
-            $version = InstalledVersions::getPrettyVersion($packageName) ?? InstalledVersions::getVersion($packageName);
-        } catch (\OutOfBoundsException $e) {
-            return;
-        }
-
-        if ($version !== null) {
-            $info[strtolower($label)] = [
-                'name' => $label,
-                'version' => $version,
-            ];
-        }
     }
 
     private static function _phpInfo()
@@ -231,7 +190,7 @@ class SystemReportService
         $reqCheck = new \RequirementsChecker();
         $dbConfig = Craft::$app->getConfig()->getDb();
         $reqCheck->dsn = $dbConfig->dsn;
-        $reqCheck->dbDriver = $dbConfig->dsn ? Db::parseDsn($dbConfig->dsn, 'driver') : Connection::DRIVER_MYSQL;
+        $reqCheck->dbDriver = $dbConfig->dsn ? self::parseDsn($dbConfig->dsn, 'driver') : 'mysql';
         $reqCheck->dbUser = $dbConfig->user;
         $reqCheck->dbPassword = $dbConfig->password;
         $reqCheck->checkCraft();
@@ -242,5 +201,106 @@ class SystemReportService
     private function _getUpdates()
     {
         return Craft::$app->getUpdates()->getUpdates(true);
+    }
+
+    private static function _dbDriver()
+    {
+        $db = Craft::$app->getDb();
+        $label = self::_getDbDriverLabel($db);
+        $version = App::normalizeVersion($db->getSchema()->getServerVersion());
+        return [
+            'name' => $label,
+            'version' => $version,
+        ];
+    }
+
+    private function _imageDriver()
+    {
+        $imagesService = Craft::$app->getImages();
+
+        if ($imagesService->getIsGd()) {
+            $driverName = 'GD';
+        } else {
+            $driverName = 'Imagick';
+        }
+
+        return [
+            'name' => $driverName,
+            'version' => $imagesService->getVersion(),
+        ];
+    }
+
+    private function _addVersion(array &$info, string $label, string $packageName)
+    {
+        try {
+            $version = InstalledVersions::getPrettyVersion($packageName) ?? InstalledVersions::getVersion($packageName);
+        } catch (\OutOfBoundsException $e) {
+            return;
+        }
+
+        if ($version !== null) {
+            $info[strtolower($label)] = [
+                'name' => $label,
+                'version' => $version,
+            ];
+        }
+    }
+
+    /**
+     * Parses a DSN string and returns an array with the `driver` and any driver params, or just a single key.
+     *
+     * @param string $dsn
+     * @param string|null $key The key that is needed from the DSN, if only one param is needed.
+     * @return array|string|false The full array, or the specific key value, or `false` if `$key` is a param that
+     * doesn’t exist in the DSN string.
+     * @throws InvalidArgumentException if $dsn is invalid
+     * @since 3.4.0
+     */
+    private static function parseDsn(string $dsn, string $key = null)
+    {
+        if (($pos = strpos($dsn, ':')) === false) {
+            throw new InvalidArgumentException('Invalid DSN: ' . $dsn);
+        }
+
+        $driver = strtolower(substr($dsn, 0, $pos));
+        if ($key === 'driver') {
+            return $driver;
+        }
+        if ($key === null) {
+            $parsed = [
+                'driver' => $driver,
+            ];
+        }
+
+        $params = substr($dsn, $pos + 1);
+        foreach (ArrayHelper::filterEmptyStringsFromArray(explode(';', $params)) as $param) {
+            list($n, $v) = array_pad(explode('=', $param, 2), 2, '');
+            if ($key === $n) {
+                return $v;
+            }
+            if ($key === null) {
+                $parsed[$n] = $v;
+            }
+        }
+
+        if ($key === null) {
+            // todo: remove comment when phpstan#5401 is fixed
+            /** @phpstan-ignore-next-line */
+            return $parsed;
+        }
+
+        return false;
+    }
+
+    private static function _getDbDriverLabel($db)
+    {
+        if ($db->getIsMysql() && str_contains(strtolower($db->getSchema()->getServerVersion()), 'mariadb')) {
+            return 'MariaDB';
+        }
+        if ($db->getIsMysql()) {
+            return 'MySQL';
+        }
+
+        return 'PostgreSQL';
     }
 }

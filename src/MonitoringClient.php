@@ -8,6 +8,7 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use vandres\monitoringclient\models\Settings;
 use yii\base\Event;
+use yii\web\JsonParser;
 
 /**
  * monitoring-client plugin
@@ -44,6 +45,12 @@ class MonitoringClient extends Plugin
 
     public function init()
     {
+        if (!isset(\Craft::$app->request->parsers['application/json'])) {
+            \Craft::$app->request->parsers = [
+                'application/json' => JsonParser::class,
+            ];
+        }
+
         parent::init();
 
         $this->setUp();

@@ -2,10 +2,10 @@
 
 namespace vandres\monitoringclient\console\controllers;
 
-use craft\console\Controller;
+use yii\console\Controller as YiiController;
 use yii\console\ExitCode;
 
-class ApiController extends Controller
+class ApiController extends YiiController
 {
     /**
      * Generates and displays a secret key

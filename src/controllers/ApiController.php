@@ -2,7 +2,6 @@
 
 namespace vandres\monitoringclient\controllers;
 
-use vandres\monitoringclient\models\Settings;
 use vandres\monitoringclient\MonitoringClient;
 use vandres\monitoringclient\services\SystemReportService;
 use yii\web\BadRequestHttpException;
