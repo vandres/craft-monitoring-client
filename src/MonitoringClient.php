@@ -45,7 +45,7 @@ class MonitoringClient extends Plugin
 
     public function init()
     {
-        if (!isset(\Craft::$app->request->parsers['application/json'])) {
+        if (!\Craft::$app->request->isConsoleRequest && !isset(\Craft::$app->request->parsers['application/json'])) {
             \Craft::$app->request->parsers = [
                 'application/json' => JsonParser::class,
             ];
