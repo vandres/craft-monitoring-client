@@ -16,7 +16,7 @@ The server is available, free for use, here https://craft-monitoring.com
 
 ## Requirements
 
-This plugin requires Craft CMS 4.0.0 or later, and PHP 8.0 or later.
+This plugin requires Craft CMS 4.0.0 or later, PHP 8.0 or later and Composer v2 or later.
 
 ## Installation
 
