@@ -74,6 +74,23 @@ curl \
     }'
 ```
 
+## Known Issues
+
+### Snaptcha
+
+If you use Snaptcha in your projects, you need to allow the monitoring client endpoint. 
+
+```php
+    use putyourlightson\snaptcha\events\ValidateFieldEvent;
+    use putyourlightson\snaptcha\services\SnaptchaService;
+
+    Event::on(SnaptchaService::class, SnaptchaService::EVENT_BEFORE_VALIDATE_FIELD, function (ValidateFieldEvent $event) {
+        if ($event->action->getUniqueId() === 'monitoring-client/api/system-report') {
+            $event->skipValidation = true;
+        }
+    });
+```
+
 ## Support my work
 
 PayPal: https://www.paypal.com/donate/?hosted_button_id=3WDU85HZCKMPA
